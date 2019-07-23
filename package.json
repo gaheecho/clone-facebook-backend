@@ -1,0 +1,20 @@
+{
+  "name": "clone-facebook-backend",
+  "version": "1.0.0",
+  "description": "practicing backend",
+  "main": "index.js",
+  "author": "gaheecho",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "2",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "pg": "^7.11.0",
+    "sequelize": "^5.9.0"
+  },
+  "scripts": {
+    "start": "node src",
+    "start:dev": "nodemon --watch src/ src/index.js"
+  }
+}
