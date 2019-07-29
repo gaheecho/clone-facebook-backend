@@ -1,23 +1,20 @@
-const Post = require('../../database/models/Post');
-const User = require('../../database/models/User');
+const Comment = require('../../database/models/Comment');
+
 
 exports.list = async (ctx) => {
-    const { query } = ctx.request;
-    const posts = await Post.findAndCountAll({
-        limit: query.limit, offset: query.offset,
-        include: [{
-            model: User,
-            as: 'users'
-        }]
+    const { post_no } = ctx.params;
+    const comments = await Comment.findAndCountAll({
+        where: { post_no: post_no }
     });
-    ctx.body = posts;
+    ctx.body = comments;
 };
 
 exports.create = async (ctx) => {
     const { body } = ctx.request;
-    const result = await Post.create({
+    const result = await Comment.create({
         content: body.content,
         user_no: body.user_no,
+        post_no: body.post_no
     });
     ctx.body = result;
 };
@@ -28,8 +25,8 @@ exports.delete = (ctx) => {
 
 exports.replace = (ctx) => {
     ctx.body = 'replace post';
-}
+};
 
 exports.update = (ctx) => {
     ctx.body = 'update post';
-}
+};
