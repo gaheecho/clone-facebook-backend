@@ -19,14 +19,52 @@ exports.create = async (ctx) => {
     ctx.body = result;
 };
 
-exports.delete = (ctx) => {
-    ctx.body = 'delete post';
+exports.delete = async (ctx) => {
+    const { body } = ctx.request;
+    const result = await Comment.destroy({ 
+        where: { 
+            user_no: body.user_no,
+            post_no: body.post_no,
+            comment_no: body.comment_no
+        } });
+    ctx.body = result;
 };
 
-exports.replace = (ctx) => {
-    ctx.body = 'replace post';
+exports.replace = async (ctx) => {
+    const { body } = ctx.request;
+    if(!body.content || !body.post_no || !body.user_no || !body.comment_no) {
+        ctx.body = 'error!!!'
+        return; 
+    };
+
+    const result = await Comment.update({
+        content: body.content
+    }, {
+        where: {
+            post_no: body.post_no,
+            comment_no: body.comment_no,
+            user_no: body.user_no
+        }
+    });
+    ctx.body = result;
 };
 
-exports.update = (ctx) => {
-    ctx.body = 'update post';
+exports.update = async (ctx) => {
+    const { body } = ctx.request;
+
+    if(!body.user_no || !body.post_no || !body.comment_no) {
+        ctx.body = 'error!!!';
+        return;
+    }
+
+    const result = await User.update({
+        content: body.content || undefined
+    }, {
+        where: {
+            user_no: body.user_no,
+            user_no: body.user_no,
+            comment_no: body.comment_no
+        }
+    });
+    ctx.body = result;
 };

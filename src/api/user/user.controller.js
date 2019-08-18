@@ -55,6 +55,11 @@ exports.replace = async (ctx) => {
 
 exports.update = async (ctx) => {
     const { body } = ctx.request;
+    if(!body.user_no || !body.user_id) {
+        ctx.body = 'error!!!';
+        return;
+    }
+    
     const result = await User.update({
         last_name: body.last_name || undefined,
         first_name: body.first_name || undefined,

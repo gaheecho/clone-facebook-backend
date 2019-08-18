@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const User = require('./User');
-const Post = require('./Post');
 
 const Comment = db.define(
     'comment',
@@ -25,7 +24,6 @@ const Comment = db.define(
 );
 
 Comment.belongsTo(User, { as: 'users', foreignKey: 'user_no'});
-Comment.belongsTo(Post, { as: 'posts', foreignKey: 'post_no'});
 
 
 module.exports =  Comment;
