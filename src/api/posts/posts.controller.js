@@ -5,7 +5,8 @@ const Comment = require('../../database/models/Comment');
 exports.list = async (ctx) => {
     const { query } = ctx.request;
     const posts = await Post.findAndCountAll({
-        limit: query.limit, offset: query.offset,
+        limit: query.limit,
+        offset: query.offset,
         include: [{
             model: User,
             as: 'users'
